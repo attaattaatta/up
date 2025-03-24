@@ -1,4 +1,4 @@
-﻿# go server + bash client uploader
+﻿# go server + bash / powershell client uploader
 
 ## Запуск сервера:
 
