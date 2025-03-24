@@ -18,12 +18,14 @@ $u=(irm http://bit.ly/41R1Bxb).assets|?{$_.name -match "upserv.exe"};iwr -Uri $u
 ## Запуск клиента:
 Linux:
 ```
-up() { command -v curl >/dev/null || sudo apt update && sudo apt install -y curl; curl -F "file=@$1" http://<server-ip>:8080/upload; }
+up() { SERVER="http://<server-IP>:8080/upload"; command -v curl >/dev/null || { sudo apt update && sudo apt install -y curl; } && curl -F "file=@$1" "$SERVER" || echo "Upload failed"; }
+
 up file.txt
 ```
 
 Windows powershell:
 ```
 function up { param([string]$file); if (!(Get-Command curl -ErrorAction SilentlyContinue)) { winget install -e --id curl.curl }; & curl.exe -F "file=@$file" "http://<server-ip>:8080/upload" }
+
 up "C:\path\to\file.txt"
 ```
