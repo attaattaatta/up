@@ -118,7 +118,7 @@ func main() {
 	http.HandleFunc("/upload", uploadHandler)
 	http.HandleFunc("/f/", fileHandler)
 
-	port := "8080"
+	port := "5555"
 	fmt.Printf("Server started at http://0.0.0.0:%s\n", port)
 	log.Println("Server started on port", port)
 	http.ListenAndServe("0.0.0.0:"+port, nil)
