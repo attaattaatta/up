@@ -1,4 +1,6 @@
-﻿# go server + bash / powershell client uploader
+﻿# go http server + bash / powershell client uploader
+
+Используется для быстрой загрузки / закачки файлов по http по уникально сгенерированной ссылке 
 
 ## Запуск сервера:
 
