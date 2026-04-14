@@ -23,11 +23,11 @@ jobs:
 
       - name: Build Linux
         run: |
-          GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o up
+          GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o up ./server/upserv.go
 
       - name: Build Windows
         run: |
-          GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o up.exe
+          GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o up.exe ./server/upserv.go
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
