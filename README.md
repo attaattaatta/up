@@ -1,6 +1,6 @@
 ﻿### What is this?
 
-A lightweight HTTP file upload/download server written in Go. Upload any file, get a random URL, and share it with others. Perfect for quick file transfers between devices on your network.
+HTTP file upload/download server written in Go. Upload any file, get a random URL, and share it with others. Perfect for quick file transfers between devices on your network.
 
 ### Features
 
