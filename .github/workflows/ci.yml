@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os: [linux, windows]
+
+    container:
+      image: golang:1.21-alpine
+
+    env:
+      CGO_ENABLED: 0
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install deps
+        run: apk add --no-cache git build-base ca-certificates
+
+      - name: Build
+        run: |
+          if [ "${{ matrix.os }}" = "windows" ]; then
+            GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o up.exe ./server/upserv.go
+          else
+            GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o up ./server/upserv.go
+          fi
