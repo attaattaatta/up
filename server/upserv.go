@@ -19,7 +19,7 @@ import (
 
 const uploadDir = "./uploads"
 const logFileName = "server.log"
-const version = "1.1.0"
+const version = "1.2.0"
 
 // Generate a random string (10 characters)
 func randomString(n int) string {
@@ -33,7 +33,11 @@ func randomString(n int) string {
 
 // Log requests to both console and log file
 func logRequest(r *http.Request, status int) {
-	logEntry := fmt.Sprintf("%s - %s %s %s - %d", time.Now().Format("2006-01-02 15:04:05"), r.RemoteAddr, r.Method, r.URL.Path, status)
+	clientIP := r.Header.Get("X-Real-IP")
+	if clientIP == "" {
+		clientIP = r.RemoteAddr
+	}
+	logEntry := fmt.Sprintf("%s - %s %s %s - %d", time.Now().Format("2006-01-02 15:04:05"), clientIP, r.Method, r.URL.Path, status)
 	fmt.Println(logEntry)
 
 	logFile, err := os.OpenFile(logFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
